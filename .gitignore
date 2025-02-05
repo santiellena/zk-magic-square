@@ -1,0 +1,11 @@
+verification_key.json
+outputs/magic_square_js/
+outputs/magic_square.r1cs
+outputs/magic_square.sym
+magic_square_0000.zkey
+magic_square_0001.zkey
+proof.json
+public.json
+pot12_0000.ptau
+pot12_0001.ptau
+pot12_final.ptau
