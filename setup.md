@@ -10,7 +10,7 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 To install Rust:
 ```bash
-# You might have problems with your term recognizing the command 
+# You might have problems with your terminal recognizing the command 
 # if you didn't follow the recomendations when rustup was installed
 rustup
 ```
@@ -38,7 +38,7 @@ cargo install --path circom
 
 ## SnarkJS
 
-You can install snarkjs with the following command:
+Install `snarkjs` with the following command:
 ```bash
 npm install -g snarkjs
 ```
