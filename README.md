@@ -140,7 +140,7 @@ Once we have the `magicSum` assigned to a `signal`, we can write the rest of the
 
 2) Each row adds `magicSum`:
 
-Here the logic is simple, we have a \( size \times size \) matrix and we need to check that all the elements of all rows add the magic sum.
+Here the logic is simple, we have a `size x size` (being `size` a constant) matrix and we need to check that all the elements of all rows add the magic sum.
 
 ```circom
 signal input values[size][size];
