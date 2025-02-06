@@ -12,7 +12,7 @@ The intention of this problem is simple, I want to prove that I know the solutio
 
 At this point you might be thinking... what in the world is a magic square??
 
-A **magic square** is an \( n \times n \) grid of distinct numbers where the sum of each **row, column, and both diagonals** is the same **magic sum**. The magic sum is given by the formula:  
+A **magic square** is an `n x n` grid of distinct numbers where the sum of each **row, column, and both diagonals** is the same **magic sum**. The magic sum is given by the formula:  
 
 <div align="center">
   <img src="images/magic_sum.png" width="250"/>
