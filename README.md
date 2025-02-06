@@ -15,19 +15,14 @@ At this point you might be thinking... what in the world is a magic square??
 A **magic square** is an \( n \times n \) grid of distinct numbers where the sum of each **row, column, and both diagonals** is the same **magic sum**. The magic sum is given by the formula:  
 
 <div align="center">
-  <img src="images/magic_sum.png" width="300"/>
+  <img src="images/magic_sum.png" width="250"/>
 </div>
-
 
 For example, in a **3×3 magic square**:  
 
-\[
-\begin{bmatrix} 
-8 & 1 & 6 \\ 
-3 & 5 & 7 \\ 
-4 & 9 & 2 
-\end{bmatrix}
-\]
+<div align="center">
+  <img src="images/matrix.png" width="120"/>
+</div>
 
 Each row, column, and diagonal add **15**.
 
@@ -99,30 +94,33 @@ We have 5 simple constraints:
 
 1) Given an \( n \times n \) matrix, the magic sum is:
 
-    \[
-        \text{Magic Sum} = \frac{n(n^2 + 1)}{2}
-    \]
+<div align="center">
+  <img src="images/magic_sum.png" width="250"/>
+</div> 
 
 2) Each row adds the magic sum: 
 
-    \[
-        \text{Row} = \sum_{i=0}^{n-1} matrix[Const][i] = \text{Magic Sum}
-    \]
+<div align="center">
+  <img src="images/row.png" width="350"/>
+</div> 
 
 3) Each column adds the magic sum:
-    \[
-        \text{Column} = \sum_{j=0}^{n-1} matrix[j][Const] = \text{Magic Sum}
-    \]
+
+<div align="center">
+  <img src="images/column.png" width="350"/>
+</div> 
 
 4) The main diagonal adds the magic sum:
-    \[
-        \text{Main Diagonal} = \sum_{i=0}^{n-1} matrix[i][i] = \text{Magic Sum}
-    \]
+
+<div align="center">
+  <img src="images/main_diagonal.png" width="360"/>
+</div> 
 
 5) The anti diagonal adds the magic sum:
-    \[
-        \text{Anti Diagonal} = \sum_{i=0}^{n-1} matrix[i][n - i - 1] = \text{Magic Sum}
-    \]
+
+<div align="center">
+  <img src="images/anti_diagonal.png" width="370"/>
+</div> 
 
 Now we need to put this math into Circom code.
 
