@@ -196,15 +196,15 @@ The "boring" part has been covered to this point, now it's time to enjoy the mag
 
 ## Compiling the Circuit
 
-This section is pretty straightforward. We will compile our Circom circuits into R1CS. The specific information of the following commands can be found [here](https://docs.circom.io/getting-started/compiling-circuits/).
+This is pretty straightforward. We will compile our Circom circuits into R1CS. The specific information of the following commands can be found [here](https://docs.circom.io/getting-started/compiling-circuits/).
 
 ```bash
 circom circuits/magic_square.circom --r1cs --wasm --sym -o outputs/
 ```
-****
-## R1CS
+But... what happens under the hood of this compilation?
 
-### Introduction
+### Gates to R1SC
+
 
 
 ****
