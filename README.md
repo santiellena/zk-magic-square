@@ -67,6 +67,8 @@ graph LR;
 ```
 Note that this is not the exact representation that is used to diagram arithmetic circuits. In our case, signals are squares, and circles are gates. Most of the times, you will see arithmetic circuits represented as in this [image](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.tutorialspoint.com%2Fdigital_circuits%2Fimages%2Ffull_adder.jpg&f=1&nofb=1&ipt=7630493c9fec8260c57cd5c16838f87815b153aa1eb165dd7f88ca0100ae1c49&ipo=images) (at least this is the formal way that I was taught in university to represent an arithmetic circuit).
 
+The inverse process, going from and arithmetic circuit to equations, is called **flattening**(this is vocabulary you can encounter in other resources, so I think it's useful you know it).
+
 But before we go on and write our constraints, there are a couple of things we need to know. 
 
 Did you note that in my previous constraints I could have written just `a * (a * a + 1) === c`? 
@@ -84,7 +86,7 @@ What is important here is that the set of constraints describing the circuit is 
 
 From now on, I will just say R1CS.
 
-⚠ Note that the representation of the R1CS from before is not accurate, I will go deeper on it soon...
+⚠ Note that the representation of the R1CS from before is not accurate (it has an extra element), I will go deeper on it soon...
 
 About the `===`: in Circom `===` is used to [generate constraints](https://docs.circom.io/circom-language/constraint-generation/), but think of it as an equality sign `=`.
 
