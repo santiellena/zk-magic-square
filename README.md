@@ -92,7 +92,7 @@ About the `===`: in Circom `===` is used to [generate constraints](https://docs.
 Now that we know how to write constraints, we will think about the problem we want to solve (magic squares) and write its constraints.
 We have 5 simple constraints:
 
-1) Given an \( n \times n \) matrix, the magic sum is:
+1) Given an `n x n` matrix, the magic sum is:
 
 <div align="center">
   <img src="images/magic_sum.png" width="250"/>
