@@ -14,9 +14,10 @@ At this point you might be thinking... what in the world is a magic square??
 
 A **magic square** is an \( n \times n \) grid of distinct numbers where the sum of each **row, column, and both diagonals** is the same **magic sum**. The magic sum is given by the formula:  
 
-\[
-\text{Magic Sum} = \frac{n(n^2 + 1)}{2}
-\]
+<div align="center">
+  <img src="images/magic_sum.png" width="300"/>
+</div>
+
 
 For example, in a **3×3 magic square**:  
 
