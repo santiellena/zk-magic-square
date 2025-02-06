@@ -28,7 +28,7 @@ For example, in a **3×3 magic square**:
 \end{bmatrix}
 \]
 
-Each row, column, and diagonal sums to **15**.
+Each row, column, and diagonal add **15**.
 
 As you see, it is pretty straightforward and easy, but it has enough maths to serve its learning purpose. I just don't want to write circuits that help me prove that I know the solution of an equation because it is a common example (see [Vitalik's blog post](https://medium.com/@VitalikButerin/quadratic-arithmetic-programs-from-zero-to-hero-f6d558cea649))
 ***
