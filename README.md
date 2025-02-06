@@ -84,6 +84,8 @@ What is important here is that the set of constraints describing the circuit is 
 
 From now on, I will just say R1CS.
 
+⚠ Note that the representation of the R1CS from before is not accurate, I will go deeper on it soon...
+
 About the `===`: in Circom `===` is used to [generate constraints](https://docs.circom.io/circom-language/constraint-generation/), but think of it as an equality sign `=`.
 
 
@@ -200,9 +202,14 @@ This section is pretty straightforward. We will compile our Circom circuits into
 circom circuits/magic_square.circom --r1cs --wasm --sym -o outputs/
 ```
 ****
+## R1CS
 
+### Introduction
+
+
+****
 ## Trusted Setup
 
+### Overview
 
-
-
+As we are going to use the Groth16 zkSNARK protocol, we will need to create a **trusted setup**. This is my favorite part of the Groth16 protocol, not because it is something super incredible and efficient (we need one trusted setup **per circuit**) but because when I first learned the protocol, all the previous concepts and the ZK magic clicked here.
