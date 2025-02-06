@@ -201,6 +201,8 @@ circom circuits/magic_square.circom --r1cs --wasm --sym -o outputs/
 ```
 ****
 
-## Computing a Witness
+## Trusted Setup
+
+
 
 
