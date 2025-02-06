@@ -14,11 +14,11 @@ template MagicSquare(size){
     signal magicSum;
     signal sizeSquared;
     sizeSquared <== size * size;
-    magicSum * 2 <== size * (sizeSquared + 1); 
+    magicSum <== (size * (sizeSquared + 1)) / 2; 
 
     // Checking row by row that the magic sum holds
     for(var i = 0; i < size; i++){
-        signal sumRow = 0;
+        var sumRow = 0;
         for(var j = 0; j < size; j++){
             sumRow += values[i][j];
         }
@@ -27,7 +27,7 @@ template MagicSquare(size){
 
     // Checking column by column that the magic sum holds
     for(var i = 0; i < size; i++){
-        signal sumCol = 0;
+        var sumCol = 0;
         for(var j = 0; j < size; j++){
             sumCol += values[j][i];
         }
@@ -35,8 +35,8 @@ template MagicSquare(size){
     }
 
     // Checking diagonals
-    signal mainDiagonal = 0;
-    signal antiDiagonal = 0;
+    var mainDiagonal = 0;
+    var antiDiagonal = 0;
     for(var i = 0; i < size; i++){
         // Main diagonal check
         mainDiagonal += values[i][i];
