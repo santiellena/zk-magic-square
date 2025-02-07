@@ -22,7 +22,7 @@ template MagicSquare(size){
         for(var j = 0; j < size; j++){
             sumRow += values[i][j];
         }
-        sumRow === magicSum;
+        sumRow - magicSum === 0;
     }
 
     // Checking column by column that the magic sum holds
@@ -31,7 +31,7 @@ template MagicSquare(size){
         for(var j = 0; j < size; j++){
             sumCol += values[j][i];
         }
-        sumCol === magicSum;
+        sumCol - magicSum === 0;
     }
 
     // Checking diagonals
@@ -44,8 +44,8 @@ template MagicSquare(size){
         // Anti diagonal check
         antiDiagonal += values[i][size - i - 1];
     }
-    mainDiagonal === magicSum;
-    antiDiagonal === magicSum;
+    mainDiagonal - magicSum === 0;
+    antiDiagonal - magicSum === 0;
 }
 
 // 5x5 Magic Square for the example

@@ -154,7 +154,7 @@ for(var i = 0; i < size; i++){
         for(var j = 0; j < size; j++){
             sumRow += values[i][j];
         }
-    sumRow === magicSum;
+    sumRow - magicSum === 0;
 }
 ```
 
@@ -166,7 +166,7 @@ for(var i = 0; i < size; i++){
         for(var j = 0; j < size; j++){
             sumCol += values[j][i];
         }
-    sumCol === magicSum;
+    sumCol - magicSum === 0;
 }
 ```
 
@@ -185,8 +185,8 @@ for(var i = 0; i < size; i++){
     // Anti diagonal check
     antiDiagonal += values[i][size - i - 1];
 }
-mainDiagonal === magicSum;
-antiDiagonal === magicSum;
+mainDiagonal - magicSum === 0;
+antiDiagonal - magicSum === 0;
 ```
 
 Logic is simple here so won't explain much.
