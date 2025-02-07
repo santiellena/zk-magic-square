@@ -203,6 +203,12 @@ This is pretty straightforward. We will compile our Circom circuits into R1CS. T
 ```bash
 circom circuits/magic_square.circom --r1cs --wasm --sym -o outputs/
 ```
+Expected output:
+
+<div align="center">
+  <img src="images/compilation_output.png" width="500"/>
+</div>
+
 But... what happens under the hood of this compilation?
 
 ### Gates to R1SC
