@@ -327,7 +327,16 @@ There isn't :), YET. All the answers to your questions are in the next section. 
 
 ### Overview
 
-As we are going to use the Groth16 zkSNARK protocol, we will need to create a **trusted setup**. This is my favorite part of the Groth16 protocol, not because it is something super incredible and efficient (we need one trusted setup **per circuit**) but because when I first learned the protocol, all the previous concepts and the ZK magic clicked here.
+As we are going to use the Groth16 zkSNARK protocol, we will need to create a **trusted setup** (phase 1). This is my favorite part of the Groth16 protocol, not because it is something super incredible and efficient (we need one trusted setup **per circuit**) but because when I first learned the protocol, all the previous concepts and the ZK magic clicked here.
+
+Then, we will have to contribute to the trusted setup the information of the circuit (remember that Groth16 requires one trusted setup per circuit). Here something interesting occurs, the R1CS is converted into a QAP (**Quadratic Arithmetic Program**). This part involves a lot of math so, please, be patient when reading (phase 2).
+
+### Powers of Tau (phase 1)
+
+
+
+### Phase 2
+
 
 
 
