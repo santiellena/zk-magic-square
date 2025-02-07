@@ -78,7 +78,7 @@ Well, there is a reason I did it that way: **Rank 1 Constraint System (R1CS)**
 
 A Rank 1 Constraint System (R1CS) is an arithmetic circuit with the requirement that each equality constraint has one multiplication (and no restriction on the number of additions):
 
-`(a_1*s_1 + ... + a_n*s_n) * (b_1*s_1 + ... + b_n*s_n) + (c_1*s_1 + ... + c_n*s_n) = 0`
+`(L_1*w_1 + ... + L_n*w_n) * (R_1*w_1 + ... + R_n*w_n) + (O_1*w_1 + ... + O_n*w_n) = 0`
 
 This makes the representation of the arithmetic circuit compatible with the use of bilinear pairings, but we won't go into details with that.
 
@@ -211,9 +211,116 @@ Expected output:
 
 But... what happens under the hood of this compilation?
 
-### Gates to R1SC
+### Arithmetic Circuit to R1SC
 
+An R1CS is a sequence of groups of three vectors (L, R, O), and the solution to an R1CS is a vector w (witness), where w must satisfy the equation L . w * R . w  - O . w = 0. `
 
+Remember when I first mentioned R1CS?
+`(L_1*w_1 + ... + L_n*w_n) * (R_1*w_1 + ... + R_n*w_n) + (O_1*w_1 + ... + O_n*w_n) = 0`
+
+L, R and O are matrices that have `n` rows, where `n` is the amount of constraints, and `m` columns, where `m` is the amount of variables used in constraints + 1 (the constant variable).
+
+From the previous compilation output, whe can see that our L, R and O will have:
+- `13` rows (linear constraints).
+- `28` columns (labels).
+
+Our witness vector `w`, will have just one column and as many rows as columns L, R and O have.
+
+All this theory sounds weird, specially when I showed you the final form of the R1CS first. We will continue with our simpler example (the one I graphed its arithmetic circuit):
+
+- `a * (a^2 + 1) = c`
+
+Where the constraints in the R1CS format were:
+
+- `a * a = b`
+- `a * (b + 1) = c`
+
+So we now have to identify our L, R and O matrices. You might be wondering(or not :|), why those letters to identify matrices? 
+
+Well, it has a reason.
+
+- `L` stands for Left Hand Side (LHS from now on)  of the constraint.
+- `R` stands for Right Hand Side (RHS from now on)  of the constraint.
+- `O` stands for output.
+
+As defined before: "a Rank 1 Constraint System (R1CS) is an arithmetic circuit with the requirement that each equality constraint has one multiplication (and no restriction on the number of additions)"
+
+What divides the Left and Right side is the multiplication (`*`).
+
+To build L, R and O, we have to recongnize the amount of rows `n` and the amount of columns `m`. Which is easy for this example:
+
+- `n == 2` because we have two equality constraints.
+- `m == 4` because we have three three variables (`a` as private input, `b` as intermediate variable, and `c` as public output)
+
+Our witness vector will look like the following:
+<div align="center">
+  <img src="images/witness.png" width="130"/>
+</div>
+
+And our L, R and O, will depend on how the constrains are formed. These matrices will only have scalar values as elements where 0 represents the absence of one of the variables in the part of the equality constraint and any other number, the times that a variable is present in the part of the equality constraint. This sounds confusing, I know, but the following example will make it crystal clear.
+
+The following image shows our constraints with some colors to make it easy to visualize:
+
+- The top constraint is green,
+- the bottom constraint is red,
+- the LHS with yeallow background,
+- the RHS with pink background,
+- and, the O without distinctions (it's alone on the right side of the equalities)
+
+<div align="center">
+  <img src="images/colored_constraints.png" width="175"/>
+</div>
+
+Construction L, R and O is quite similar, so I will show the process for just one because the process for the others is analogous.
+
+#### Constructing R
+
+We already know that the size of the matrix is 2x4 (two rows, four columns), but we now have to know which values assign to our emmpty matrix.
+
+Remember what I said, absense of the variable means 0 and presence of the variable means the scalar asociated with the variable. The order we will follow is the same order of the witness vector (`[1, a, c, b]`).
+
+<div align="center">
+  <img src="images/RHS.png" width="185"/>
+</div>
+
+As you can see, in the first row (for the green constraint) we placed 1 in the `a` field, because the scalar asociated with `a` is one in the first row. And only `a` has assigned a value because no other variable is present in the first RHS.
+
+Then, in the second row (red constraint), we placed 1 in in the constant field and in `b` field. Same reasoning than before.
+
+For L and, O I will just show the final result so you can check your own calculations.
+
+<div align="center">
+  <img src="images/LHS.png" width="185"/>
+  <img src="images/O.png" width="160.3"/>
+</div>
+
+The R1CS equation is:
+
+<div align="center">
+  <img src="images/R1CS.png" width="200"/>
+</div>
+
+Where L, R and O are 2x4 matrices, and w is a 4x1 vector.
+
+<div align="center">
+  <img src="images/R1CS_expanded.png" width="500"/>
+</div>
+
+For a witness to be valid, the R1CS equation must be true.
+
+At this point, the equation that I previously shown, has to make sense (I assume you have previous knowledge of matrix operations):
+`(L_1*w_1 + ... + L_n*w_n) * (R_1*w_1 + ... + R_n*w_n) + (O_1*w_1 + ... + O_n*w_n) = 0`
+
+#### Recap
+
+Well, now we know how to convert an arithmetic circuit to a R1CS! Congrats, this is a huuuge step!
+
+With witness for the R1CS, a prover can send the witness to the verifier and the verifier can now calculate the operations and see that if the equation is satisfied, the witness is valid!!!!!
+
+Ok but...
+
+You may be wondering, where is the zero-knowledge in this?
+There isn't :), YET. All the answers to your questions are in the next section. Believe me!
 
 ****
 ## Trusted Setup
@@ -221,3 +328,8 @@ But... what happens under the hood of this compilation?
 ### Overview
 
 As we are going to use the Groth16 zkSNARK protocol, we will need to create a **trusted setup**. This is my favorite part of the Groth16 protocol, not because it is something super incredible and efficient (we need one trusted setup **per circuit**) but because when I first learned the protocol, all the previous concepts and the ZK magic clicked here.
+
+
+
+
+
