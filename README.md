@@ -32,11 +32,11 @@ As you see, it is pretty straightforward and easy, but it has enough maths to se
 
 In order to keep this document brief (as much as I can), the step-to-step explanation of what needs to be installed and the commands to do it is all in the [setup](setup.md) file.
 ****
-## Introduction
+## What's Next
 
 We already defined the problem we want to solve (the constraints) and the maths behind it. In the following sections, we will go step-to-step exposing the theory and reasons behind each step.
 
-First, we will write a Circom circuit to then compile it converting it to a R1CS (Rank One Constraint System). Then, as we will use the Groth16 zk-SNARK protocol, we need to generate a trusted setup and contribute to it (super cool thing). Finally, we will generate some proofs to verify them on our terminal and also **on-chain** using our own smart contract writen in Solidity.
+First, we will write a Circom circuit to then compile it converting it to a R1CS (Rank One Constraint System). Then, as we will use the Groth16 zk-SNARK protocol, we need to generate a trusted setup and contribute to it (super cool thing). Finally, we will generate some proofs to verify them on our terminal and also **on-chain** using our own smart contract written in Solidity.
 ****
 
 ## Writing Magic Square Circuit
@@ -403,9 +403,16 @@ The final SRS for Groth16 is circuit specific, remember.
 
 ### Phase 2
 
+#### Overview
+
+
+
 #### R1CS to QAP
 
 
+#### Evaluation QAP in Trusted Setup
+
+#### Groth16 Trusted Setup & Security Considerations
 
 ****
 
