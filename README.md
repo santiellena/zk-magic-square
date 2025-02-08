@@ -331,14 +331,30 @@ As we are going to use the Groth16 zkSNARK protocol, we will need to create a **
 
 Then, we will have to contribute to the trusted setup the information of the circuit (remember that Groth16 requires one trusted setup per circuit). Here something interesting occurs, the R1CS is converted into a QAP (**Quadratic Arithmetic Program**). This part involves a lot of math so, please, be patient when reading (phase 2).
 
+For this section, prior knowledge of [Elliptic Curves over Finite Fields](https://www.rareskills.io/post/elliptic-curves-finite-fields) and [Bilineal Pairings](https://www.rareskills.io/post/bilinear-pairing) is assumed.
+
+⚠ A good understanding of the [Discrete logarithm problem](https://www.youtube.com/watch?v=SL7J8hPKEWY) is key!
+
 ### Powers of Tau (phase 1)
 
+A trusted setup is a mechanism ZK-SNARKs use to evaluate a polynomial at a secret value. 
 
-
-### Phase 2
-
-
-
+Why a polinomial? One of the steps we haven't covered yet is converting a R1CS to a QAP. Wait till the next part and everything will make sense there. 
 
 
 
+### Phase 2 (R1CS to QAP)
+
+
+
+****
+
+## Compiling the Witness
+
+****
+
+## Proof Generation
+
+***
+
+## Proof Verification
