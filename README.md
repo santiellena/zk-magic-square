@@ -341,6 +341,38 @@ A trusted setup is a mechanism ZK-SNARKs use to evaluate a polynomial at a secre
 
 Why a polinomial? One of the steps we haven't covered yet is converting a R1CS to a QAP. Wait till the next part and everything will make sense there. 
 
+The creator of the trusted setup will generate a random secret tau value and will compute:
+
+<div align="center">
+  <img src="images/powers_of_tau.png" width="300"/>
+</div>
+
+Where `n` is the number of rows of the R1CS. In "phase 2", we will see why.
+
+Then it will multiply each of those points with the generator point of a cryptographic elliptic curve group:
+
+<div align="center">
+  <img src="images/SRS.png" width="600"/>
+</div>
+
+Now anyone can take the Structure Reference String (SRS) and evaluate a degree `n` polynomial (or less) on tau.
+
+This is called "trusted setup" because only the creator knows tau, which is the discreate log of the functions evaluated at tau, and we rely on the creator to delete tau and have no way to recover it.
+
+For our project, we will be the creators of the trusted setup.
+
+Start a new powers of tau ceremony:
+```bash
+snarkjs powersoftau new bn128 12 pot12_0000.ptau -v
+```
+
+But wait, a "ceremony"? What does this mean?
+
+To increase the security of the system and avoid relying on only one actor to generate tau and forevever delete it. Now actors are required also to "contribute" to the trusted setup by generating their own random scalars and forgetting them. 
+
+Sequentially, all actors involved will generate their scalar and will multiply the powers of the scalar with the SRS of the last contributor. The last actor will end up with the final SRS, that will be used for proving.
+
+This ceremony increases the system security because as long one contributor acts honestly and deletes its random scalar, the trusted setup is safe. All the other actors can be malicious, but it takes just one honest actor to be 100% safe.
 
 
 ### Phase 2 (R1CS to QAP)
