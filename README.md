@@ -403,12 +403,18 @@ The final SRS for Groth16 is circuit specific, remember.
 
 ### Phase 2
 
-#### Overview
+#### Introduction
+For this section, in addition to all othe previous sections, some extra knowledge is needed.
 
+The reader has to be comfortable with the following topics:
 
+- **Lagrange Interpolations**. The minimum knowledge needed is [here](https://www.rareskills.io/post/python-lagrange-interpolation) in the ZK Book from RareSkills. However, a deeper understanding of this topis can be helpful when understanding why the proof generation in Groth16 is slow compared to others protocols (this is not the main reason, of course, multi-scalar multiplications and pairing based cryptography are). If you want to dive deep on the topic, I recommend [this video](https://www.youtube.com/watch?v=REnFOKo9gXs) from Lambda Class. 
+
+- **Schwartz-Zippel Lemma**. Again, the ZK Book from RareSkills covers this topic well in [this chapter](https://www.rareskills.io/post/schwartz-zippel-lemma).
+
+Additionally, at least superficial knowledge about **Fast Fourier Transformations (FFT)** would be nice for an optional part of this section that covers optimizations in the Groth16 protocol. This concept is used to optimize Lagrange Interpolations (R1CS to QAP).
 
 #### R1CS to QAP
-
 
 #### Evaluation QAP in Trusted Setup
 
