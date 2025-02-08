@@ -361,7 +361,7 @@ This is called "trusted setup" because only the creator knows tau, which is the 
 
 For our project, we will be the creators of the trusted setup.
 
-Start a new powers of tau ceremony:
+Start a new powers of tau ceremony, using the pairing-friendly elliptic curve `bn128`:
 ```bash
 snarkjs powersoftau new bn128 12 pot12_0000.ptau -v
 ```
@@ -374,8 +374,36 @@ Sequentially, all actors involved will generate their scalar and will multiply t
 
 This ceremony increases the system security because as long one contributor acts honestly and deletes its random scalar, the trusted setup is safe. All the other actors can be malicious, but it takes just one honest actor to be 100% safe.
 
+So we will contribute again to the ceremony, simulating that we are other actor:
+```bash
+snarkjs powersoftau contribute pot12_0000.ptau pot12_0001.ptau --name="First contribution" -v
+```
 
-### Phase 2 (R1CS to QAP)
+You will see something similar to this:
+
+<div align="center">
+  <img src="images/pt_ceremony_log.png" width="400"/>
+</div>
+
+You are now probably thinking: I get what `tauG1` is, but what about `tauG2`, `alphaTauG1`, and `betaTauG1`?
+
+- `tauG2` is essentially the same than `tauG1` but multiplying tau with the generator point of a second cryptographic elliptic curve group.
+
+<div align="center">
+  <img src="images/SRS_2.png" width="600"/>
+</div>
+
+- `alphaTauG1` is a key element for proof security (don't confuse with `[alpha]_1`).
+
+- `betaTauG1` is later used in the proving key (don't confuse with `[beta]_2`).
+
+I won't go in much detail in how they are used for security, but these last two values essentially link the universal Powers of Tau setup to the final structured reference string (SRS) for Groth16. 
+
+The final SRS for Groth16 is circuit specific, remember.
+
+### Phase 2
+
+#### R1CS to QAP
 
 
 
