@@ -34,9 +34,9 @@ In order to keep this document brief (as much as I can), the step-to-step explan
 ****
 ## Introduction
 
-We already defined the problem we want to solve (the constrains) and the maths behind it. In the following sections, we will go step-to-step exposing the theory and reasons behind each step.
+We already defined the problem we want to solve (the constraints) and the maths behind it. In the following sections, we will go step-to-step exposing the theory and reasons behind each step.
 
-First, we will write a Circom circuit to then compile it converting it to a R1CS (Rank One Constrain System). Then, as we will use the Groth16 zk-SNARK protocol, we need to generate a trusted setup and contribute to it (super cool thing). Finally, we will generate some proofs to verify them on our terminal and also **on-chain** using our own smart contract writen in Solidity.
+First, we will write a Circom circuit to then compile it converting it to a R1CS (Rank One Constraint System). Then, as we will use the Groth16 zk-SNARK protocol, we need to generate a trusted setup and contribute to it (super cool thing). Finally, we will generate some proofs to verify them on our terminal and also **on-chain** using our own smart contract writen in Solidity.
 ****
 
 ## Writing Magic Square Circuit
@@ -257,7 +257,7 @@ Our witness vector will look like the following:
   <img src="images/witness.png" width="130"/>
 </div>
 
-And our L, R and O, will depend on how the constrains are formed. These matrices will only have scalar values as elements where 0 represents the absence of one of the variables in the part of the equality constraint and any other number, the times that a variable is present in the part of the equality constraint. This sounds confusing, I know, but the following example will make it crystal clear.
+And our L, R and O, will depend on how the constraints are formed. These matrices will only have scalar values as elements where 0 represents the absence of one of the variables in the part of the equality constraint and any other number, the times that a variable is present in the part of the equality constraint. This sounds confusing, I know, but the following example will make it crystal clear.
 
 The following image shows our constraints with some colors to make it easy to visualize:
 
