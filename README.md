@@ -263,7 +263,7 @@ The following image shows our constraints with some colors to make it easy to vi
 
 - The top constraint is green,
 - the bottom constraint is red,
-- the LHS with yeallow background,
+- the LHS with yellow background,
 - the RHS with pink background,
 - and, the O without distinctions (it's alone on the right side of the equalities)
 
@@ -271,7 +271,7 @@ The following image shows our constraints with some colors to make it easy to vi
   <img src="images/colored_constraints.png" width="175"/>
 </div>
 
-Construction L, R and O is quite similar, so I will show the process for just one because the process for the others is analogous.
+Construction of L, R and O is quite similar, so I will show the process for just one because the process for the others is analogous.
 
 #### Constructing R
 
