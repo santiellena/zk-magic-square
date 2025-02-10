@@ -399,7 +399,7 @@ You are now probably thinking: I get what `tauG1` is, but what about `tauG2`, `a
 
 I won't go in much detail in how they are used for security, but these last two values essentially link the universal Powers of Tau setup to the final structured reference string (SRS) for Groth16. 
 
-The final SRS for Groth16 is circuit specific, remember.
+The final SRS for Groth16 is circuit specific, remember, and it allows us to value a **polynomial** at tau without knowing the actual value of tau.
 
 ### Phase 2
 
