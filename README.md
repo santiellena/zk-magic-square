@@ -414,9 +414,34 @@ The reader has to be comfortable with the following topics:
 
 Additionally, at least superficial knowledge about **Fast Fourier Transformations (FFT)** would be nice for an optional part of this section that covers optimizations in the Groth16 protocol. This concept is used to optimize Lagrange Interpolations (R1CS to QAP).
 
-#### R1CS to QAP
+#### Preparation
 
-#### Evaluation QAP in Trusted Setup
+In order to prepare this phase 2 of the trusted setup we run:
+```bash
+snarkjs powersoftau prepare phase2 pot12_0001.ptau pot12_final.ptau -v
+```
+
+This step eliminates the non-public randomness of the setup (or *toxic waste*) and computes a predifined subset of the powers of tau.
+
+#### R1CS to QAP
+After preparation, we will execute the following command:
+```bash
+snarkjs groth16 setup outputs/magic_square.r1cs pot12_final.ptau magic_square_0000.zkey
+```
+
+This previous command will:
+1) Convert R1CS to QAP (this section)
+2) Evaluate QAP at SRS Powers of Tau
+3) Embed Phase 2 Contributions (to ensure soundness)
+4) Generate Proving & Verification Keys
+
+
+
+A Quadratic Arithmetic Program is a representation of a R1CS as a set of polynomials.
+
+
+
+#### Evaluating QAP in Trusted Setup
 
 #### Groth16 Trusted Setup & Security Considerations
 
