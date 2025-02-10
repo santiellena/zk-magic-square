@@ -455,7 +455,7 @@ Let's see then how to go from R1CS to QAP.
 
 To do this, we will use a R1CS of the same size that the previous example, where L, R and O are 2x4 matrices, and w is a 4x1 vector.
 
-First we will generalize the method, and then I will show an example with the exact R1CS from before.
+We will directly generalize the method because to show an example, I will have to explain the Lagrange interpolation algorithm and run it many times. I want to keep this as succint as possible.
 
 Let's define L, R, O and w as:
 
@@ -518,6 +518,49 @@ Then the R1CS converted into a QAP will look like the following:
   <img src="images/incomplete_qap.png" width="500"/>
 </div>
 
+But... WAIT!!!
+
+We know that a polynomial multiplication results in a product polynomial whose degree is the sum of the degrees of the two polynomials being multiplied together.
+
+As the interpolation of `L` and `R` are of degree `n-1`, the polynomial product should result in a `2n-2` degree polynomial. However, the interpolation of `O` is a `n-1` degree polynomial.
+
+We need to adjust that to balance the degrees.
+
+We will calculate a polynomial `b(x)` such that adding it to the equation will balance it.
+
+<div align="center">
+  <img src="images/poly_imbalance.png" width="300"/>
+</div>
+
+`b(x)` will also be the result of interpolating the 0 vector. Which is doing the Lagrange interpolation of `(1, 0), (2, 0), (3, 0), (4, 0)`.
+
+We need `b(x)` to interpolate the 0 vector so the polynomial transformation of `v1 * v2 = v3 + 0` (where * is the Hadamard product) respects the underlying vectors (interpolated vectors).
+
+However, allowing the prover to introduce any `b(x)` introduces a security risk. The prover could pick any `b(x)` that balances the equation (which is the calculation the verifier does) but does not interpolate the 0 vector (`b(x) has to have roots at (1, 2, 3, 4) from 1 to n`).
+
+
+To enforce `b(x)` to interpolate the 0 vector, we will now say that:
+
+<div align="center">
+  <img src="images/balancing_qap.png" width="400"/>
+</div>
+
+This enforces `b(x)` to have the set roots of `{r_h} U {r_t}` (the union of roots of the polynomial product).
+
+**Observations:**
+
+We showed how a R1CS can be converted into a QAP, which allows us to quickly verify conmputations in `O(1)` time. 
+
+This somehow looks like zero knowledge because the verifier can send a random value to the prover, expecting the prover to follow all the process explained before, so the prover computes the QAP and evaluates it on the random value, sends it to the verifier, so then the verifier just checks the equality.
+
+This will hide the witness well, as sending a polynomial does not reveal the witness.
+
+However, this has many security implications:
+
+- Prover could use any set of polynomials that evaluated a that random value meet the equality requirement, and the verifier wouldn't notice.
+- This is not **non-interactive**, which is part of the SNARK definition.
+
+In the following section, we will show how all the security issues are eliminated with a trusted setup.
 
 #### Evaluating QAP in Trusted Setup
 
