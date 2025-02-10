@@ -435,10 +435,88 @@ This previous command will:
 3) Embed Phase 2 Contributions (to ensure soundness)
 4) Generate Proving & Verification Keys
 
-
+Now, let's finally see what is a QAP.
 
 A Quadratic Arithmetic Program is a representation of a R1CS as a set of polynomials.
 
+It is derived using Lagrange interpolation on a Rank 1 Constraint System. Unlike an R1CS, a QAP can be tested for equality in `O(1)` time, instead of in `O(n)` time with `n` being the number of rows, via the Schwartz-Zippel Lemma. This is a huge improvement in efficiency, but we need R1CS because they are a developer friendly representation of the constraints.
+
+Using polynomials instead of matrices to test equality is only possible because the group of vectors under addition in a finite field is homomorphic to the group of polynomials under addition in a finite field.
+
+<div align="center">
+  <img src="images/addition_homomorphism.png" width="300"/>
+</div>
+
+Where:
+- `L(v)` is the polynomial resulting for doing the Lagrange interpolation of vector `v`.
+
+
+Let's see then how to go from R1CS to QAP.
+
+To do this, we will use a R1CS of the same size that the previous example, where L, R and O are 2x4 matrices, and w is a 4x1 vector.
+
+First we will generalize the method, and then I will show an example with the exact R1CS from before.
+
+Let's define L, R, O and w as:
+
+<div align="center">
+  <img src="images/LHS_generalization.png" width="300"/>
+  <img src="images/RHS_generalization.png" width="300"/>
+  <img src="images/O_generalization.png" width="300"/>
+</div>
+
+<div align="center">
+  <img src="images/w_generalization.png" width="100"/>
+</div>
+
+We will split each column of L, R and O to use those values to do a Lagrange interpolation with `(1, 2, ..., n)` in the x axis.
+
+Let's take L as example, as the process is analogous for R and O.
+
+We will do a Lagrange interpolation for the following columns to get a polynomial for each column.
+
+<div align="center">
+  <img src="images/L_lagrange_interpolation.png" width="400"/>
+</div>
+
+Where `u_i` are polynomials of degree `n-1` because the Lagrange interpolation returns for a set of `n` points,  the unique lowest-degree polynomial of at most degree `n-1` that interpolates them.
+
+So now, we can express:
+
+<div align="center">
+  <img src="images/Lw_after_interpolation.png" width="500"/>
+</div>
+
+And this representation is possible because of the following property.
+
+Scalar multiplication:
+
+<div align="center">
+  <img src="images/scalar_multiplication.png" width="200"/>
+</div>
+
+Where:
+- `L(v)` is the polynomial resulting for doing the Lagrange interpolation of vector `v`,
+- and, `lambda` is a scalar.
+
+So now, we can represent the R1CS equation, as a polynomial equation:
+
+<div align="center">
+  <img src="images/R1CS.png" width="200"/>
+</div>
+
+Where `Lw` was previously defined, and:
+
+<div align="center">
+  <img src="images/Rw_after_interpolation.png" width="200"/>
+  <img src="images/Ow_after_interpolation.png" width="200"/>
+</div>
+
+Then the R1CS converted into a QAP will look like the following:
+
+<div align="center">
+  <img src="images/incomplete_qap.png" width="500"/>
+</div>
 
 
 #### Evaluating QAP in Trusted Setup
