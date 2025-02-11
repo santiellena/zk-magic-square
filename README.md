@@ -768,6 +768,20 @@ Now, we will open the [Remix IDE](https://remix.ethereum.org/) to deploy the con
 value!!
 ****
 
-## Overview
+## Overview & Thanks
 
+Finally we've reached the end of this project. It all started as a simple practical project to test my abilities to write and understand Circom, but it ended up being a huge project that took me a long time to write and gave me some headaches in te process. 
 
+To be honest, I don't expect anyone to get around to reading all this. This project really helped me to fully understand Groth16 zkSNARK, reinforce some mathematical concepts, and like ZK a bit more. But well, if you like me are out of your mind and decide to read this huge document, I garantee you that you will have all the tools at your hands to understand the magic of zkSNARKs.
+
+Take into account that this project was 100% written by me, a native Spanish speaker, who is really prone to grammatical errors (specially typos), and also conceptual errors can be there. So keep your eye open!
+
+Last, I will mention all the sources of knowledge that were helpful and inspiring to write this all. I heavily recommend you to go through each of them and embrace the knowledge.
+
+- The [ZK Book]() from [RareSkills]: this book was my main source of knowledge, all the content needed is there. Many thanks to RareSkills for providing free access to this book.
+- ["An overview of the Groth16 proof system"](https://blog.lambdaclass.com/groth16/) by LambdaClass. This post helped me a lot to understand some "whys" of the protocol and pushed me to refresh some math concepts that were key in the end to understand all.
+- ["All the MATH you need to understand SNARKs"](https://www.youtube.com/playlist?list=PLFX2cij7c2PynTNWDBzmzaD6ij170ILbQ) a YouTube playlist of LambdaClass. The name explains itself. I really recommend this resource, it's key.
+
+Those resources have a ton of math concepts involved, but don't get scared by symbols and math stuff, it's always easier than it looks!
+
+Thank you for reading and I hope this repository has been helpful!
