@@ -52,4 +52,4 @@ template MagicSquare(size){
 }
 
 // 5x5 Magic Square for the example
-component main = MagicSquare(5);
+component main {public [dummy]} = MagicSquare(5);
