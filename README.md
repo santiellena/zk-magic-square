@@ -674,6 +674,12 @@ To contribute to blinding this phase 2, the trusted setup allows contributions f
 snarkjs zkey contribute magic_square_0000.zkey magic_square_0001.zkey --name="some name" -v
 ```
 
+And finally, **export the verification key** so it can be used to generate and verify proofs:
+
+```bash
+snarkjs zkey export verificationkey magic_square_0001.zkey verification_key.json
+```
+
 After all these steps now we are ready to start feeling the magic of zkSNARKs. 
 
 In the previous sections we have prepared the magic trick, and in the following sections we will perform it!
@@ -701,12 +707,10 @@ node outputs/magic_square_js/generate_witness.js outputs/magic_square_js/magic_s
 
 ## Proof Generation
 
+
+
 ***
 
 ## Proof Verification
 
-### Exporting the key
 
-```bash
-snarkjs zkey export verificationkey magic_square_0001.zkey verification_key.json
-```
