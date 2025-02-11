@@ -671,7 +671,7 @@ This post from RareSkills covers all the information specific about the Groth16 
 To contribute to blinding this phase 2, the trusted setup allows contributions from multi-parties, as in phase 1. Here `alpha`, `beta`, `gamma` and `delta` are values that get updated (esentially they are multiplied by the contribution which introduces the discrete log problem for the party that knew those values).
 
 ```bash
-snarkjs zkey contribute magic_sqare_0000.zkey magic_sqare_0001.zkey --name="some name" -v
+snarkjs zkey contribute magic_square_0000.zkey magic_square_0001.zkey --name="some name" -v
 ```
 
 After all these steps now we are ready to start feeling the magic of zkSNARKs. 
@@ -681,6 +681,12 @@ In the previous sections we have prepared the magic trick, and in the following 
 ****
 
 ## Compiling the Witness
+
+For this section, we will have to compile our witness with a valid input, so in the next section, we can generate a proof.
+
+```bash
+node outputs/magic_square_js/generate_witness.js outputs/magic_square_js/magic_square.wasm inputs/input.json outputs/magic_square_js/witness.wtns
+```
 
 ****
 
@@ -693,5 +699,5 @@ In the previous sections we have prepared the magic trick, and in the following 
 ### Exporting the key
 
 ```bash
-snarkjs zkey export verificationkey magic_sqare_0001.zkey verification_key.json
+snarkjs zkey export verificationkey magic_square_0001.zkey verification_key.json
 ```
