@@ -221,8 +221,8 @@ Remember when I first mentioned R1CS?
 L, R and O are matrices that have `n` rows, where `n` is the amount of constraints, and `m` columns, where `m` is the amount of variables used in constraints + 1 (the constant variable).
 
 From the previous compilation output, whe can see that our L, R and O will have:
-- `13` rows (linear constraints).
-- `28` columns (labels).
+- `14` rows (linear constraints).
+- `29` columns (labels).
 
 Our witness vector `w`, will have just one column and as many rows as columns L, R and O have.
 
