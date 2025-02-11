@@ -756,5 +756,18 @@ If we generate the Solidity verifier and our circuit has zero public inputs, the
 Now, we will open the [Remix IDE](https://remix.ethereum.org/) to deploy the contract of the `Groth16Verifier` and test it there.
 
 - Create a file with any name with the `.sol` extension, and paste the `Verifier.sol` code.
-- Go to the compilation section of Remix and set the version to `0.8.0`.
+- Go to the compilation section of Remix and set the version to `0.8.0`, and compilte it.
+- Go to the Deploy & run transactions section and deploy the contract.
+- You will see the deployed contract in the deployed contracts section:
+
+<div align="center">
+  <img src="images/remix_deployed.png" width="200"/>
+</div>
+
+- Input the values in `proof.json` and `input.json`, and see the return 
+value!!
+****
+
+## Overview
+
 
