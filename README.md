@@ -781,6 +781,7 @@ Last, I will mention all the sources of knowledge that were helpful and inspirin
 - The [ZK Book]() from [RareSkills]: this book was my main source of knowledge, all the content needed is there. Many thanks to RareSkills for providing free access to this book.
 - ["An overview of the Groth16 proof system"](https://blog.lambdaclass.com/groth16/) by LambdaClass. This post helped me a lot to understand some "whys" of the protocol and pushed me to refresh some math concepts that were key in the end to understand all.
 - ["All the MATH you need to understand SNARKs"](https://www.youtube.com/playlist?list=PLFX2cij7c2PynTNWDBzmzaD6ij170ILbQ) a YouTube playlist of LambdaClass. The name explains itself. I really recommend this resource, it's key.
+- The [Circom documentation](https://docs.circom.io/). Easiest resource to learn Circom and how to implement it.
 
 Those resources have a ton of math concepts involved, but don't get scared by symbols and math stuff, it's always easier than it looks!
 
