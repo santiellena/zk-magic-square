@@ -707,10 +707,54 @@ node outputs/magic_square_js/generate_witness.js outputs/magic_square_js/magic_s
 
 ## Proof Generation
 
+Once the witness is computed and the trusted setup is already executed, we can generate a zk-proof associated to the circuit and the witness from the last section:
 
+```bash
+snarkjs groth16 prove magic_square_0001.zkey outputs/magic_square_js/witness.wtns proof.json public.json
+```
 
-***
+This generates a Groth16 proof and outputs two files:
+
+- `proof.json`: it contains the proof.
+- `public.json`: it contains the values of the public inputs and outputs (which in our case there aren't public inputs).
+
+****
 
 ## Proof Verification
+Final section!! Now we need to verify that our generated proof is valid!
 
+This can be done in two ways:
+- In the terminal, using `snarkjs` (which is boring!), or
+- in a Solidity Smart Contract.
+
+I will show you both:
+
+### Verification with `snarkjs`
+
+To verify the proof, execute the following command:
+```bash
+snarkjs groth16 verify verification_key.json public.json proof.json
+```
+
+You will see: 
+```bash
+[INFO]  snarkJS: OK!
+```
+
+### Verifying from a Smart Contract
+
+Luckyly, `snarkjs` has a functionality to generate the `Verifier.sol`(Solidity code) for us:
+
+```bash
+snarkjs zkey export solidityverifier magic_square_0001.zkey Verifier.sol
+```
+
+This is a good point to finally explain why I decided to introduce a `dummy` public input in my Circom implementation.
+
+If we generate the Solidity verifier and our circuit has zero public inputs, the code will fail. This might seem wrong or an error in the implementationg of the generation of the verifier, but no. In the security considerations section of the Groth16 protocol, there is an explanation of why public inputs are needed. So enforcing the precence of public inputs it's not bad at all.
+
+Now, we will open the [Remix IDE](https://remix.ethereum.org/) to deploy the contract of the `Groth16Verifier` and test it there.
+
+- Create a file with any name with the `.sol` extension, and paste the `Verifier.sol` code.
+- Go to the compilation section of Remix and set the version to `0.8.0`.
 

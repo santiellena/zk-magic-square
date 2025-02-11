@@ -1,6 +1,9 @@
 pragma circom 2.0.0;
 
 template MagicSquare(size){
+    // This dummy input is here so the Solidity verifier works.
+    signal input dummy;
+    dummy === 1;    
     /* 
         Size passed as this template can be 
         used with any magic square size 
