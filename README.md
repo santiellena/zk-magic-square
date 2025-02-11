@@ -682,10 +682,19 @@ In the previous sections we have prepared the magic trick, and in the following 
 
 ## Compiling the Witness
 
-For this section, we will have to compile our witness with a valid input, so in the next section, we can generate a proof.
+For this section, we will just have to compile our witness with a valid input, so in the next section, we can generate a proof.
+
+Note: it was added a valid 5x5 magic square in the `inputs/input.json` file, but feel free to modify it!
 
 ```bash
 node outputs/magic_square_js/generate_witness.js outputs/magic_square_js/magic_square.wasm inputs/input.json outputs/magic_square_js/witness.wtns
+```
+Now, we will also compile an invalid witness. If the circuit is well constructed, it should revert!
+
+Note: it was added an invalid 5x5 magic square in the `inputs/invalid.json` file, but feel free to modify it!
+
+```bash
+node outputs/magic_square_js/generate_witness.js outputs/magic_square_js/magic_square.wasm inputs/invalid.json outputs/magic_square_js/witness_invalid.wtns
 ```
 
 ****
