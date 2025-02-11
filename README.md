@@ -560,11 +560,123 @@ However, this has many security implications:
 - Prover could use any set of polynomials that evaluated a that random value meet the equality requirement, and the verifier wouldn't notice.
 - This is not **non-interactive**, which is part of the SNARK definition.
 
-In the following section, we will show how all the security issues are eliminated with a trusted setup.
+In the following sections, we will show how all the security issues are eliminated with a trusted setup.
 
 #### Evaluating QAP in Trusted Setup
 
+So we in earlier sections said that we had a SRS as the shown below:
+
+<div align="center">
+  <img src="images/SRS.png" width="400"/>
+</div>
+<div align="center">
+  <img src="images/SRS_2.png" width="400"/>
+</div>
+
+And we have a QAP whose LHS will be now `A(x)`, the RHS will now be `B(x)` and the output O will be `C(x)`.
+
+The generalization of how this is computed is kind of confusing and could make you quit reading because of how awful is looks, and the truth is that it is so simple that it is not necessary to generalize it. Just a simple example will work.
+
+All it takes is to be comfortable with the following way of representing polynomials:
+
+<div align="center">
+  <img src="images/qap_on_tau_format.png" width="400"/>
+</div>
+
+Which let's say `f(x)` is evaluated at 2:
+
+<div align="center">
+  <img src="images/qap_on_tau_format_evaluated.png" width="400"/>
+</div>
+
+Well, with this in mind evaluating at a polynomial of the QAP, with the SRS values, is like "pluging in" those powers of tau in the polynomials. Esentially evaluating the polynomials at tau without knowing tau.
+
+Thus, `A(t)`, `B(t)` and `C(t)`, in our simple example, will look like the following (remember that this definition is formal but as I don't want to go through explaining how to represent the coeficients of `x`, I don't want you to distract with it when looking):
+
+<div align="center">
+  <img src="images/QAP_at_tau.png" width="400"/>
+</div>
+
+Remember that our simple example polynomial had `n-1` degree. So as `n == 2`, we have 1 degree polynomials (`nx + c = f(x)`).
+
+You probably noticed a discrepancy between those previous valuations. 
+
+- `A and C` are evaluated in the elliptic curve group that `G1` generates,
+- and `B` are evaluated in the elliptic curve group that `G2` generates.
+
+This is because, we want the verifier to use **Bilinear Parings** to verify our equations.
+
+Just to remember:
+
+- A pairing function:
+
+<div align="center">
+  <img src="images/pairing.png" width="200"/>
+</div>
+
+has the special property:
+
+<div align="center">
+  <img src="images/pairing_property.png" width="200"/>
+</div>
+
+if and only if P and P' have the same scalar multiple in G1, and Q and Q' have the same scalar multiple in G2.
+
+To verify the proof wee need the following pairing check:
+
+<div align="center">
+  <img src="images/pairing_verification.png" width="300"/>
+</div>
+
+But hold on! `C(x)` is still incomplete! We have not yet calculated `h(x)t(x)`!
+
+##### Computing h(x)t(x)
+
+For this part we have to be aware of the degree of `A(x)`, `B(x)`, `t(x)`, and `h(x)`.
+- `A` and `B` could be `n-1` at most because they interpolate `n` points.
+- `p(x)` can be as low as 0, so it won't interfere in the calculation.
+- `t(x)` is by definition of degree `n`.
+- Multiplying polynomials adds their degree and dividing them substracts their degrees.
+
+`deg(A) + deg(B) - deg(t) = deg(h)`
+`n-1 + n-1 - n = n-2`
+
+- `h(x)` has a `n-2` degree.
+
+As we cannot compute separately `h(tau)t(tau)` because we want to get an element of the G1 group, we need to build a SRS just for this part.
+
+To create the SRS for `h(tau)t(tau)`, we create `n-1` evaluations of succesive powers of Tau:
+
+<div align="center">
+  <img src="images/ht_srs.png" width="600"/>
+</div>
+
+And with that SRS, we can use the same logic from the previously explained format to write expressions separating coefficients and variables:
+
+<div align="center">
+  <img src="images/ht_srs_evaluated.png" width="600"/>
+</div>
+
+
 #### Groth16 Trusted Setup & Security Considerations
+
+Till this point, everything about R1CS and QAP has been covered. However, there are still security considerations that we have to have in mind. This considerations were implemented in the Groth16 protocol.
+
+The full explanation of this can be found here: https://www.rareskills.io/post/groth16
+
+This post from RareSkills covers all the information specific about the Groth16 protocol using similar notation than here. That is the best explanation I've found on the topic, and I don't feel I could add much from my side writing here.
+
+**Extra step:**
+
+To contribute to blinding this phase 2, the trusted setup allows contributions from multi-parties, as in phase 1. Here `alpha`, `beta`, `gamma` and `delta` are values that get updated (esentially they are multiplied by the contribution which introduces the discrete log problem for the party that knew those values).
+
+```bash
+snarkjs zkey contribute magic_sqare_0000.zkey magic_sqare_0001.zkey --name="some name" -v
+```
+
+After all these steps now we are ready to start feeling the magic of zkSNARKs. 
+
+In the previous sections we have prepared the magic trick, and in the following sections we will perform it!
 
 ****
 
@@ -577,3 +689,9 @@ In the following section, we will show how all the security issues are eliminate
 ***
 
 ## Proof Verification
+
+### Exporting the key
+
+```bash
+snarkjs zkey export verificationkey magic_sqare_0001.zkey verification_key.json
+```
