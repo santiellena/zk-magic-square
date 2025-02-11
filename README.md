@@ -774,7 +774,7 @@ Finally we've reached the end of this project. It all started as a simple practi
 
 To be honest, I don't expect anyone to get around to reading all this. This project really helped me to fully understand Groth16 zkSNARK, reinforce some mathematical concepts, and like ZK a bit more. But well, if you like me are out of your mind and decide to read this huge document, I garantee you that you will have all the tools at your hands to understand the magic of zkSNARKs.
 
-Take into account that this project was 100% written by me, a native Spanish speaker, who is really prone to grammatical errors (specially typos), and also conceptual errors can be there. So keep your eye open!
+Take into account that this project was 100% written by me, a native Spanish speaker, who is really prone to grammatical errors (specially typos), and also conceptual errors can be there. So keep your eye open! If you find errors you can open an Issue or send a Pool Request, I'll be glad to receive them!
 
 Last, I will mention all the sources of knowledge that were helpful and inspiring to write this all. I heavily recommend you to go through each of them and embrace the knowledge.
 
